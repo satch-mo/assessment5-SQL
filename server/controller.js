@@ -32,6 +32,7 @@ module.exports = {
                 FOREIGN KEY (country_id) REFERENCES countries(country_id)
             );
 
+
             insert into countries (name)
             values ('Afghanistan'),
             ('Albania'),
@@ -228,6 +229,11 @@ module.exports = {
             ('Yemen'),
             ('Zambia'),
             ('Zimbabwe');
+
+            INSERT INTO cities (name, rating, country_id)
+            VALUES ('Dubai', 5, 185),
+            ('Barcelona', 4, 165),
+            ('Toronto', 3, 33);
         `
       )
       .then(() => {
@@ -269,7 +275,8 @@ module.exports = {
         `
         SELECT city_id, cities.name AS city, rating, countries.country_id, countries.name AS country 
         FROM cities, countries 
-        WHERE cities.country_id = countries.country_id;
+        WHERE cities.country_id = countries.country_id
+        ORDER BY rating DESC;
       `
       )
       .then((dbRes) => {
